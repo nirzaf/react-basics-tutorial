@@ -36,7 +36,38 @@ function WelcomeMessage() {
     exercise: {
       title: "Setup Your Environment",
       description: "Your first task is to set up a local React development environment using Vite. Follow the official Vite guide to create a new React + TypeScript project. Once done, try to render a simple 'Hello World' message.",
-      solutionHint: "Use `npm create vite@latest your-app-name -- --template react-ts`, then modify `src/App.tsx`."
+      solutionHint: "Use `npm create vite@latest your-app-name -- --template react-ts`, then modify `src/App.tsx`.",
+      miniTasks: [
+        {
+          task: "Create a new React component called Greeting that displays 'Hello from React!' in an h2 element.",
+          code: `// Create this component in a new file called Greeting.tsx
+import React from 'react';
+
+const Greeting = () => {
+  // Your code here
+};
+
+export default Greeting;`,
+          hint: "Return an h2 element with the text 'Hello from React!'"
+        },
+        {
+          task: "Import and use your Greeting component in App.tsx",
+          code: `// In App.tsx
+import React from 'react';
+// Import your Greeting component here
+
+function App() {
+  return (
+    <div className="App">
+      {/* Add your Greeting component here */}
+    </div>
+  );
+}
+
+export default App;`,
+          hint: "Import Greeting from './Greeting' and add <Greeting /> inside the div"
+        }
+      ]
     },
     quiz: {
       question: "What is React primarily used for?",
@@ -110,7 +141,63 @@ function ProductCard(props: any) {
       <p>Price: ${"$"}{props.price}</p>
     </div>
   );
-}`
+}`,
+      miniTasks: [
+        {
+          task: "Create a functional component called ProductCard with TypeScript props interface",
+          code: `// Create a file named ProductCard.tsx
+import React from 'react';
+
+// Create an interface for the component props
+interface ProductCardProps {
+  // Define the props types here
+}
+
+const ProductCard: React.FC<ProductCardProps> = () => {
+  // Your component code here
+};
+
+export default ProductCard;`,
+          hint: "Define name as string and price as number in the ProductCardProps interface"
+        },
+        {
+          task: "Add styling to your ProductCard component using className attributes",
+          code: `// In your ProductCard component
+const ProductCard: React.FC<ProductCardProps> = ({ name, price }) => {
+  return (
+    <div>
+      {/* Add className attributes for styling */}
+      <h2>{name}</h2>
+      <p>Price: ${"$"}{price}</p>
+    </div>
+  );
+};`,
+          hint: "Add className attributes like 'border p-4 rounded shadow' to the div and 'text-lg font-bold' to the h2"
+        },
+        {
+          task: "Use your ProductCard component in App.tsx with sample data",
+          code: `// In App.tsx
+import React from 'react';
+import ProductCard from './ProductCard';
+
+function App() {
+  // Create sample product data
+  const products = [
+    // Add 2-3 product objects with name and price
+  ];
+  
+  return (
+    <div className="App">
+      <h1>Product Catalog</h1>
+      <div className="product-list">
+        {/* Render ProductCard components here */}
+      </div>
+    </div>
+  );
+}`,
+          hint: "Map through the products array to render a ProductCard for each product"
+        }
+      ]
     },
     quiz: {
       question: "What does JSX stand for?",
@@ -176,7 +263,67 @@ function Counter() {
     exercise: {
       title: "Toggleable Message",
       description: "Create a component `ToggleMessage` that has a button. When the button is clicked, it toggles the visibility of a message ('Message is visible' / 'Message is hidden'). Use state to manage the visibility.",
-      solutionHint: "Use `useState` for a boolean `isVisible` state. The button's `onClick` should toggle this state."
+      solutionHint: "Use `useState` for a boolean `isVisible` state. The button's `onClick` should toggle this state.",
+      miniTasks: [
+        {
+          task: "Create a ToggleMessage component with a state variable to track visibility",
+          code: `// Create a file named ToggleMessage.tsx
+import React, { useState } from 'react';
+
+const ToggleMessage: React.FC = () => {
+  // Add state to track visibility
+  
+  return (
+    <div>
+      {/* Add your button and conditional message here */}
+    </div>
+  );
+};
+
+export default ToggleMessage;`,
+          hint: "Use const [isVisible, setIsVisible] = useState(false) to create a state variable"
+        },
+        {
+          task: "Add a toggle button that changes the visibility state",
+          code: `// In your ToggleMessage component
+const ToggleMessage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  // Add a function to handle the toggle
+  
+  return (
+    <div>
+      <button>
+        {/* Add button text */}
+      </button>
+      {/* Add conditional message rendering */}
+    </div>
+  );
+};`,
+          hint: "Create a handleToggle function that calls setIsVisible(!isVisible) and attach it to the button's onClick event"
+        },
+        {
+          task: "Conditionally render different messages based on the visibility state",
+          code: `// In your ToggleMessage component
+const ToggleMessage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  const handleToggle = () => {
+    setIsVisible(!isVisible);
+  };
+  
+  return (
+    <div className="p-4 border rounded">
+      <button onClick={handleToggle} className="px-4 py-2 bg-sky-500 text-white rounded">
+        Toggle Message
+      </button>
+      {/* Add conditional rendering here */}
+    </div>
+  );
+};`,
+          hint: "Use a ternary operator or && to conditionally render 'Message is visible' when isVisible is true and 'Message is hidden' when it's false"
+        }
+      ]
     },
     quiz: {
       question: "Which statement is true about props?",
@@ -275,7 +422,81 @@ function TitleUpdater() {
       placeholder="Enter your name" 
     />
   );
-}`
+}`,
+      miniTasks: [
+        {
+          task: "Create a TitleUpdater component with useState for the input value",
+          code: `// Create a file named TitleUpdater.tsx
+import React, { useState } from 'react';
+
+const TitleUpdater: React.FC = () => {
+  // Add state for the input field
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2>Update Document Title</h2>
+      {/* Add your input field here */}
+    </div>
+  );
+};
+
+export default TitleUpdater;`,
+          hint: "Use const [inputValue, setInputValue] = useState('') to create a state variable for the input"
+        },
+        {
+          task: "Add an input field that updates the state when changed",
+          code: `// In your TitleUpdater component
+const TitleUpdater: React.FC = () => {
+  const [inputValue, setInputValue] = useState('');
+  
+  // Add a function to handle input changes
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2>Update Document Title</h2>
+      <input
+        type="text"
+        className="border p-2 w-full"
+        placeholder="Type something..."
+        // Add value and onChange props
+      />
+      <p className="mt-2">Current input: {inputValue}</p>
+    </div>
+  );
+};`,
+          hint: "Create a handleChange function that calls setInputValue with the event target value and attach it to the input's onChange event"
+        },
+        {
+          task: "Use useEffect to update the document title when the input changes",
+          code: `// In your TitleUpdater component
+import React, { useState, useEffect } from 'react';
+
+const TitleUpdater: React.FC = () => {
+  const [inputValue, setInputValue] = useState('');
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+  
+  // Add useEffect hook here
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2>Update Document Title</h2>
+      <input
+        type="text"
+        className="border p-2 w-full"
+        placeholder="Type something..."
+        value={inputValue}
+        onChange={handleChange}
+      />
+      <p className="mt-2">Current input: {inputValue}</p>
+    </div>
+  );
+};`,
+          hint: "Add useEffect(() => { document.title = inputValue ? `Typing: ${inputValue}` : 'React App'; }, [inputValue]); to update the title when inputValue changes"
+        }
+      ]
     },
     quiz: {
       question: "When does `useEffect` with an empty dependency array (<code>[]</code>) run?",
@@ -339,7 +560,78 @@ function ActionButton() {
     exercise: {
       title: "Simple Input Logger",
       description: "Create a component with an text input field. As the user types into the input, display the current value of the input field below it in a `<p>` tag. Use the `onChange` event.",
-      solutionHint: "Use `useState` to store the input's value. The `onChange` handler on the input should update this state."
+      solutionHint: "Use `useState` to store the input's value. The `onChange` handler on the input should update this state.",
+      miniTasks: [
+        {
+          task: "Create an InputLogger component with state for the input value",
+          code: `// Create a file named InputLogger.tsx
+import React, { useState } from 'react';
+
+const InputLogger: React.FC = () => {
+  // Add state for the input value
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2>Input Logger</h2>
+      {/* Add your input field here */}
+      {/* Add a paragraph to display the input value */}
+    </div>
+  );
+};
+
+export default InputLogger;`,
+          hint: "Use const [inputValue, setInputValue] = useState('') to create a state variable"
+        },
+        {
+          task: "Add an input field with an onChange event handler",
+          code: `// In your InputLogger component
+const InputLogger: React.FC = () => {
+  const [inputValue, setInputValue] = useState('');
+  
+  // Create an event handler function for the input
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2>Input Logger</h2>
+      <input
+        type="text"
+        className="border p-2 w-full"
+        placeholder="Type something..."
+        // Add value and onChange props
+      />
+      {/* Add a paragraph to display the input value */}
+    </div>
+  );
+};`,
+          hint: "Create a handleInputChange function that takes an event parameter and calls setInputValue with e.target.value"
+        },
+        {
+          task: "Display the current input value in a paragraph below the input",
+          code: `// In your InputLogger component
+const InputLogger: React.FC = () => {
+  const [inputValue, setInputValue] = useState('');
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Update the state with the input value
+  };
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2>Input Logger</h2>
+      <input
+        type="text"
+        className="border p-2 w-full"
+        placeholder="Type something..."
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      {/* Add a paragraph to display the input value */}
+    </div>
+  );
+};`,
+          hint: "Add a <p> element below the input that displays the current value of inputValue"
+        }
+      ]
     },
     quiz: {
       question: "How do you pass an event handler for a click event in React JSX?",
@@ -403,7 +695,106 @@ function LoginStatus(props: { isLoggedIn: boolean }) { // Typed props
     exercise: {
       title: "Show/Hide Details",
       description: "Create a component `ItemWithDetails`. It should display an item's name and a button 'Show Details'. When the button is clicked, it should display additional details about the item. Clicking it again should hide the details. Use conditional rendering.",
-      solutionHint: "Use a state variable (e.g., `showDetails`) and toggle it on button click. Conditionally render the details section based on this state."
+      solutionHint: "Use a state variable (e.g., `showDetails`) and toggle it on button click. Conditionally render the details section based on this state.",
+      miniTasks: [
+        {
+          task: "Create an ItemWithDetails component with state to track if details are visible",
+          code: `// Create a file named ItemWithDetails.tsx
+import React, { useState } from 'react';
+
+interface ItemProps {
+  name: string;
+  details: string;
+}
+
+const ItemWithDetails: React.FC<ItemProps> = ({ name, details }) => {
+  // Add state to track if details are visible
+  
+  return (
+    <div className="p-4 border rounded mb-4">
+      {/* Add item name and button here */}
+      {/* Conditionally render details */}
+    </div>
+  );
+};
+
+export default ItemWithDetails;`,
+          hint: "Use const [showDetails, setShowDetails] = useState(false) to create a state variable"
+        },
+        {
+          task: "Add a button that toggles the visibility of details",
+          code: `// In your ItemWithDetails component
+const ItemWithDetails: React.FC<ItemProps> = ({ name, details }) => {
+  const [showDetails, setShowDetails] = useState(false);
+  
+  // Create a function to toggle the details visibility
+  
+  return (
+    <div className="p-4 border rounded mb-4">
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg font-bold">{name}</h3>
+        <button
+          className="px-3 py-1 bg-sky-500 text-white rounded"
+          // Add onClick handler here
+        >
+          {/* Set button text based on state */}
+        </button>
+      </div>
+      {/* Conditionally render details */}
+    </div>
+  );
+};`,
+          hint: "Create a toggleDetails function that calls setShowDetails(!showDetails) and attach it to the button's onClick event"
+        },
+        {
+          task: "Conditionally render the details section based on state",
+          code: `// In your ItemWithDetails component
+const ItemWithDetails: React.FC<ItemProps> = ({ name, details }) => {
+  const [showDetails, setShowDetails] = useState(false);
+  
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
+  };
+  
+  return (
+    <div className="p-4 border rounded mb-4">
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg font-bold">{name}</h3>
+        <button
+          className="px-3 py-1 bg-sky-500 text-white rounded"
+          onClick={toggleDetails}
+        >
+          {showDetails ? 'Hide Details' : 'Show Details'}
+        </button>
+      </div>
+      {/* Add conditional rendering for details here */}
+    </div>
+  );
+};`,
+          hint: "Use the logical && operator or a ternary operator to conditionally render a div containing the details"
+        },
+        {
+          task: "Use the ItemWithDetails component with sample data in App.tsx",
+          code: `// In App.tsx
+import React from 'react';
+import ItemWithDetails from './ItemWithDetails';
+
+function App() {
+  // Create sample items with names and details
+  const items = [
+    // Add 2-3 sample items
+  ];
+  
+  return (
+    <div className="App p-4">
+      <h1 className="text-2xl font-bold mb-4">Items List</h1>
+      {/* Render ItemWithDetails components for each item */}
+    </div>
+  );
+}`,
+          hint: "Map through the items array to render an ItemWithDetails component for each item, passing name and details as props"
+        }
+      ]
     },
     quiz: {
       question: "Which operator is commonly used for inline conditional rendering of one of two components?",
@@ -464,7 +855,91 @@ const numbers = [1, 2, 3, 4, 5];
     exercise: {
       title: "User List Component",
       description: "Create a component `UserList` that takes an array of user objects (e.g., `[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]`) as a prop. Render each user's name in a list item. Ensure each list item has a unique and stable key.",
-      solutionHint: "Map over the users array. Use `user.id` as the key for each `<li>`."
+      solutionHint: "Map over the users array. Use `user.id` as the key for each `<li>`.",
+      miniTasks: [
+        {
+          task: "Create a UserList component with TypeScript interface for user objects",
+          code: `// Create a file named UserList.tsx
+import React from 'react';
+
+// Create an interface for a user object
+interface User {
+  // Define the properties a user should have
+}
+
+// Create an interface for the component props
+interface UserListProps {
+  // Define what props the component accepts
+}
+
+const UserList: React.FC<UserListProps> = ({ users }) => {
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-2">Users</h2>
+      {/* Add your list here */}
+    </div>
+  );
+};
+
+export default UserList;`,
+          hint: "Define User interface with id (number) and name (string) properties, and UserListProps with users (User[]) property"
+        },
+        {
+          task: "Render the list of users with proper keys",
+          code: `// In your UserList component
+const UserList: React.FC<UserListProps> = ({ users }) => {
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-2">Users</h2>
+      <ul className="list-disc list-inside">
+        {/* Map over the users array and render list items */}
+      </ul>
+    </div>
+  );
+};`,
+          hint: "Use users.map(user => <li key={user.id}>{user.name}</li>) to render the list items with proper keys"
+        },
+        {
+          task: "Add conditional rendering for empty users array",
+          code: `// In your UserList component
+const UserList: React.FC<UserListProps> = ({ users }) => {
+  // Add conditional rendering for empty users array
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-2">Users</h2>
+      <ul className="list-disc list-inside">
+        {users.map(user => (
+          <li key={user.id} className="mb-1">{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};`,
+          hint: "Add a condition at the beginning to check if users.length === 0 and return a message like 'No users found' if true"
+        },
+        {
+          task: "Use the UserList component with sample data in App.tsx",
+          code: `// In App.tsx
+import React from 'react';
+import UserList from './UserList';
+
+function App() {
+  // Create sample users data
+  const users = [
+    // Add 3-4 user objects with id and name properties
+  ];
+  
+  return (
+    <div className="App p-4">
+      <h1 className="text-2xl font-bold mb-4">User Directory</h1>
+      {/* Render the UserList component with the users data */}
+    </div>
+  );
+}`,
+          hint: "Create an array of user objects with id and name properties, then render <UserList users={users} />"
+        }
+      ]
     },
     quiz: {
       question: "Why are 'keys' important when rendering lists in React?",
@@ -539,7 +1014,160 @@ function NameForm() {
     exercise: {
       title: "Feedback Form",
       description: "Create a simple feedback form with a textarea for comments and a submit button. Make the textarea a controlled component. When submitted, log the feedback to the console.",
-      solutionHint: "Use `useState` for the textarea's value. Set `value` and `onChange` on the `<textarea>`. The `onSubmit` handler on the form should log the state."
+      solutionHint: "Use `useState` for the textarea's value. Set `value` and `onChange` on the `<textarea>`. The `onSubmit` handler on the form should log the state.",
+      miniTasks: [
+        {
+          task: "Create a FeedbackForm component with state for the textarea value",
+          code: `// Create a file named FeedbackForm.tsx
+import React, { useState } from 'react';
+
+const FeedbackForm: React.FC = () => {
+  // Add state for the feedback text
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-4">Feedback Form</h2>
+      {/* Add your form here */}
+    </div>
+  );
+};
+
+export default FeedbackForm;`,
+          hint: "Use const [feedback, setFeedback] = useState('') to create a state variable for the textarea"
+        },
+        {
+          task: "Create a controlled textarea with onChange handler",
+          code: `// In your FeedbackForm component
+const FeedbackForm: React.FC = () => {
+  const [feedback, setFeedback] = useState('');
+  
+  // Create a function to handle textarea changes
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-4">Feedback Form</h2>
+      <form>
+        <div className="mb-4">
+          <label htmlFor="feedback" className="block mb-2 font-medium">
+            Your Feedback:
+          </label>
+          <textarea
+            id="feedback"
+            rows={4}
+            className="w-full p-2 border rounded"
+            placeholder="Please share your thoughts..."
+            // Add value and onChange props
+          />
+        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600"
+        >
+          Submit Feedback
+        </button>
+      </form>
+    </div>
+  );
+};`,
+          hint: "Create a handleChange function that takes an event parameter and calls setFeedback with e.target.value, then add value={feedback} and onChange={handleChange} to the textarea"
+        },
+        {
+          task: "Add form submission handler to log feedback to console",
+          code: `// In your FeedbackForm component
+const FeedbackForm: React.FC = () => {
+  const [feedback, setFeedback] = useState('');
+  
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFeedback(e.target.value);
+  };
+  
+  // Add form submission handler
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-4">Feedback Form</h2>
+      <form>
+        <div className="mb-4">
+          <label htmlFor="feedback" className="block mb-2 font-medium">
+            Your Feedback:
+          </label>
+          <textarea
+            id="feedback"
+            rows={4}
+            className="w-full p-2 border rounded"
+            placeholder="Please share your thoughts..."
+            value={feedback}
+            onChange={handleChange}
+          />
+        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600"
+        >
+          Submit Feedback
+        </button>
+      </form>
+    </div>
+  );
+};`,
+          hint: "Create a handleSubmit function that takes an event parameter, calls e.preventDefault() to prevent page reload, logs the feedback to the console, and optionally resets the form"
+        },
+        {
+          task: "Add validation to ensure feedback is not empty before submission",
+          code: `// In your FeedbackForm component
+const FeedbackForm: React.FC = () => {
+  const [feedback, setFeedback] = useState('');
+  const [error, setError] = useState('');
+  
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFeedback(e.target.value);
+    // Clear error when user starts typing
+    if (error) setError('');
+  };
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Add validation logic here
+    
+    // If valid, log to console
+    console.log('Feedback submitted:', feedback);
+    
+    // Reset form after submission
+    setFeedback('');
+  };
+  
+  return (
+    <div className="p-4 border rounded">
+      <h2 className="text-xl font-bold mb-4">Feedback Form</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="feedback" className="block mb-2 font-medium">
+            Your Feedback:
+          </label>
+          <textarea
+            id="feedback"
+            rows={4}
+            className="w-full p-2 border rounded"
+            placeholder="Please share your thoughts..."
+            value={feedback}
+            onChange={handleChange}
+          />
+          {error && <p className="mt-1 text-red-500 text-sm">{error}</p>}
+        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600"
+        >
+          Submit Feedback
+        </button>
+      </form>
+    </div>
+  );
+};`,
+          hint: "Add a condition in handleSubmit to check if feedback.trim() === '' and if so, set an error message like 'Feedback cannot be empty' and return early"
+        }
+      ]
     },
     quiz: {
       question: "In a controlled component, where is the form data primarily managed?",

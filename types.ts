@@ -15,6 +15,11 @@ export interface Exercise {
   title: string;
   description: string;
   solutionHint?: string;
+  miniTasks?: {
+    task: string;
+    code?: string;
+    hint?: string;
+  }[];
 }
 
 export interface Topic {
