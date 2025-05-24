@@ -5,9 +5,22 @@ import { Topic } from '../types';
 
 interface NavbarProps {
   topics: Topic[];
+  searchTerm?: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ topics }) => {
+// Function to highlight search term in text
+const highlightText = (text: string, searchTerm: string): React.ReactNode => {
+  if (!searchTerm.trim()) return text;
+  
+  const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
+  
+  return parts.map((part, index) => {
+    return part.toLowerCase() === searchTerm.toLowerCase() ? 
+      <span key={index} className="bg-sky-600 text-white font-semibold">{part}</span> : part;
+  });
+};
+
+export const Navbar: React.FC<NavbarProps> = ({ topics, searchTerm = '' }) => {
   if (topics.length === 0) {
     return <p className="text-gray-400">No topics match your search.</p>;
   }
@@ -24,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({ topics }) => {
                 }`
               }
             >
-              {topic.title}
+              {highlightText(topic.title, searchTerm)}
             </NavLink>
           </li>
         ))}
